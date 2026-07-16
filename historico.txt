@@ -1,0 +1,4 @@
+trazer|telemovel
+trazer|livro
+trazer|oculos
+trazer|oculos

@@ -1,0 +1,4 @@
+chaves|cozinha
+oculos|mesa da sala
+telemovel|secretária
+livro|estante
