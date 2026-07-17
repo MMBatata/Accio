@@ -1,0 +1,56 @@
+{
+    "Comando da TV": {
+        "divisao": "Sala",
+        "movel": "Mesa da televisão",
+        "confianca": 100
+    },
+
+    "Chaves": {
+        "divisao": "Hall de entrada",
+        "movel": "Entrada",
+        "confianca": 100
+    },
+
+    "Livro": {
+        "divisao": "Quarto 1",
+        "movel": "Cama",
+        "confianca": 100
+    },
+
+    "Portátil": {
+        "divisao": "Sala",
+        "movel": "Mesa dos PCs",
+        "confianca": 100
+    },
+
+    "Tablet": {
+        "divisao": "Desconhecido",
+        "movel": "",
+        "confianca": 0
+    },
+
+    "Carregador": {
+        "divisao": "WC 1",
+        "movel": "",
+        "confianca": 100
+    },
+
+    "Garrafa de água": {
+        "divisao": "Cozinha",
+        "movel": "Bancada",
+        "confianca": 100
+    },
+
+    "Chaves suplentes": {
+        "divisao": "Hall de entrada",
+        "movel": "",
+        "confianca": 100
+    },
+
+    "Mochila": {
+        "divisao": "Hall de entrada",
+        "movel": "Banco",
+        "confianca": 100,
+        "nota": "Durante a semana. Ao fim de semana fica no armário."
+    }
+}

@@ -1,11 +1,6 @@
 estado = {
     "local": "base",
-    "bateria": 100,
-    "ocupado": False,
-    "a_transportar": None
-}
-estado = {
-    "local": "base",
+    "posicao": "hall",
     "bateria": 100,
     "ocupado": False,
     "a_transportar": None

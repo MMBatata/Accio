@@ -6,7 +6,7 @@ from comandos import executar_comando
 
 def menu():
     print("\n==============================")
-    print("        ACCIO V3")
+    print("         ACCIO V3")
     print("==============================")
     print("1 - Conversar")
     print("2 - Calculadora")

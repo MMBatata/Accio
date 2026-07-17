@@ -1,0 +1,85 @@
+{
+    "base": "Hall de entrada",
+
+    "divisoes": {
+
+        "Hall de entrada": {
+            "liga": [
+                "Sala",
+                "Cozinha",
+                "Corredor"
+            ],
+            "obstaculos": [
+                "Banco",
+                "Armário"
+            ]
+        },
+
+        "Sala": {
+            "liga": [
+                "Hall de entrada"
+            ],
+            "obstaculos": [
+                "Sofá",
+                "Mesa da televisão",
+                "Mesa dos PCs"
+            ]
+        },
+
+        "Cozinha": {
+            "liga": [
+                "Hall de entrada"
+            ],
+            "obstaculos": [
+                "Mesa",
+                "Bancada"
+            ]
+        },
+
+        "Corredor": {
+            "liga": [
+                "Hall de entrada",
+                "Quarto 1",
+                "WC 1"
+            ],
+            "obstaculos": []
+        },
+
+        "Quarto 1": {
+            "liga": [
+                "Corredor",
+                "Quarto 2"
+            ],
+            "obstaculos": [
+                "Cama"
+            ]
+        },
+
+        "Quarto 2": {
+            "liga": [
+                "Quarto 1",
+                "WC 2"
+            ],
+            "obstaculos": [
+                "Cama",
+                "Móvel 1",
+                "Móvel 2"
+            ]
+        },
+
+        "WC 1": {
+            "liga": [
+                "Corredor"
+            ],
+            "obstaculos": []
+        },
+
+        "WC 2": {
+            "liga": [
+                "Quarto 2"
+            ],
+            "obstaculos": []
+        }
+
+    }
+}

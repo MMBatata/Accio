@@ -1,4 +1,6 @@
 from casa import casa
+from visualizacao import mostrar_mapa
+from estado import estado
 
 
 def encontrar_caminho(origem, destino):
@@ -37,7 +39,8 @@ def percorrer_caminho(caminho):
     print("\n🚶 A deslocar-me...\n")
 
     for divisao in caminho:
-        print(f"📍 Estou em: {divisao.capitalize()}")
+        estado["posicao"] = divisao
+        mostrar_mapa(divisao)
         time.sleep(2)
 
     print("\n✅ Destino alcançado!")

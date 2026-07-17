@@ -1,5 +1,7 @@
 from mapa import locais
 from robot import executar_missao
+from navegacao import encontrar_caminho, percorrer_caminho
+from estado import estado
 
 
 def criar_missao(comando):
@@ -139,15 +141,28 @@ def iniciar_missao(numero):
 
         local = locais.get(objeto, "local desconhecido")
 
+        # Deslocar o Accio até ao destino
+        if local != "local desconhecido":
+
+            caminho = encontrar_caminho(
+                estado["posicao"],
+                local
+            )
+
+            if caminho:
+                percorrer_caminho(caminho)
+
+            estado["posicao"] = local
+
+        # Executar a missão
         executar_missao(objeto, local)
 
+        # Concluir a missão
         concluir_missao(numero)
 
     except FileNotFoundError:
 
         print("Não existe nenhum ficheiro de missões.")
-
-
 def concluir_missao(numero):
 
     try:

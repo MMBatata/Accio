@@ -3,6 +3,8 @@ from calculadora import calculadora
 from estado import estado_accio, relatorio
 from memoria import dizer_local, saber_objeto
 from tarefas import lista_tarefas
+from navegacao import encontrar_caminho, percorrer_caminho
+from estado import estado
 
 from missoes import (
     criar_missao,
