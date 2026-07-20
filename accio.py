@@ -2,6 +2,7 @@ from conversa import conversar
 from calculadora import calculadora
 from tarefas import lista_tarefas, carregar_tarefas
 from comandos import executar_comando
+from visao import observar
 
 
 def menu():

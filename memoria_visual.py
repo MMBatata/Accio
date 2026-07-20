@@ -1,18 +1,16 @@
 import json
 import os
-from datetime import datetime
 
-FICHEIRO = "memoria_visual.json"
+FICHEIRO = "objetos.json"
 
 
 def carregar():
 
-    if os.path.exists(FICHEIRO):
+    if not os.path.exists(FICHEIRO):
+        return {}
 
-        with open(FICHEIRO, "r", encoding="utf-8") as f:
-            return json.load(f)
-
-    return {}
+    with open(FICHEIRO, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def guardar(memoria):
@@ -21,38 +19,27 @@ def guardar(memoria):
         json.dump(memoria, f, indent=4, ensure_ascii=False)
 
 
-def atualizar(objetos, divisao):
+def atualizar(objeto, divisao):
 
     memoria = carregar()
 
-    agora = datetime.now().strftime("%d/%m/%Y %H:%M")
-
-    for objeto in objetos:
-
-        memoria[objeto] = {
-            "divisao": divisao,
-            "ultima_vista": agora
-        }
+    memoria[objeto] = divisao
 
     guardar(memoria)
+
+
+def onde_esta(objeto):
+
+    memoria = carregar()
+
+    return memoria.get(objeto)
 
 
 def mostrar():
 
     memoria = carregar()
 
-    print("\n====== MEMÓRIA VISUAL ======\n")
+    print("\n===== MEMÓRIA VISUAL =====\n")
 
-    if len(memoria) == 0:
-
-        print("Ainda não existe informação.")
-
-    else:
-
-        for objeto, dados in memoria.items():
-
-            print(
-                f"{objeto} → {dados['divisao']} ({dados['ultima_vista']})"
-            )
-
-    print()
+    for objeto, divisao in memoria.items():
+        print(f"{objeto} -> {divisao}")
