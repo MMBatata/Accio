@@ -5,6 +5,8 @@ from memoria import dizer_local, saber_objeto
 from tarefas import lista_tarefas
 from navegacao import encontrar_caminho, percorrer_caminho
 from estado import estado
+from visao import observar
+from memoria_visual import atualizar
 
 from missoes import (
     criar_missao,
@@ -195,6 +197,30 @@ def executar_comando(comando):
     elif "relatorio" in comando or "relatório" in comando:
 
         relatorio()
+
+    elif "ronda" in comando:
+
+        divisoes = [
+            "Hall de entrada",
+            "Sala",
+            "Cozinha",
+            "Corredor",
+            "Quarto 1",
+            "Quarto 2",
+            "WC 1",
+            "WC 2"
+        ]
+
+        print("\n🤖 A iniciar ronda da casa...\n")
+
+        for divisao in divisoes:
+
+            encontrados = observar(divisao)
+
+            for objeto in encontrados:
+                atualizar(objeto, divisao)
+
+        print("\n✅ Ronda concluída!")
 
     else:
         print("Accio: Ainda não percebo esse comando.")
