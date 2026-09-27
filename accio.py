@@ -1,85 +1,38 @@
-from ultralytics import YOLO
-import cv2
+# accio.py
 import time
+from comandos import executar_comando
 
-from memoria_visual import atualizar
+def inicializar_robot():
+    print("=" * 45)
+    print("🪄 [FEITIÇO DE ATIVAÇÃO] A despertar o Accio...")
+    print("=" * 45)
+    time.sleep(1)
+    
+    # Simulação do Diagnóstico de Hardware (Estilo Mark Rober)
+    print("📡 A testar ligação à placa de microfones... [OK]")
+    time.sleep(0.5)
+    print("🚗 A verificar os encoders dos motores...     [OK]")
+    time.sleep(0.5)
+    print("💨 A testar a pressão da bomba de vácuo...    [OK]")
+    time.sleep(0.5)
+    print("🗺️ A carregar o mapa mental da casa...        [OK]")
+    time.sleep(1)
+    
+    print("\n✨ 'Juro solenemente que não vou fazer nada de bom!' ✨")
+    print("🤖 Sistema operacional. Aguardando o teu feitiço...")
+    print("=" * 45)
 
-# Carrega o modelo apenas uma vez
-modelo = YOLO("yolov8n.pt")
+# Arranca o diagnóstico antes de entrar no ciclo de comandos
+inicializar_robot()
 
-# Tradução dos nomes do YOLO
-TRADUCAO = {
-    "tv": "Televisão",
-    "remote": "Comando da TV",
-    "laptop": "Portátil",
-    "bottle": "Garrafa de água",
-    "chair": "Cadeira",
-    "person": "Pessoa",
-    "cell phone": "Telemóvel",
-    "mouse": "Rato",
-    "keyboard": "Teclado",
-    "book": "Livro",
-    "cup": "Copo"
-}
+while True:
+    comando = input("\nTu > ").strip()
 
+    if comando == "":
+        continue
 
-def observar(divisao):
+    if comando.lower() in ["sair", "adeus", "exit"]:
+        print("\n⚡ 'Malfeito feito!' O Accio voltou a adormecer. Até breve!")
+        break
 
-    print(f"\n📷 A observar a divisão: {divisao}\n")
-
-    cam = cv2.VideoCapture(0)
-
-    if not cam.isOpened():
-        print("❌ Não consegui abrir a webcam.")
-        return []
-
-    objetos = []
-
-    inicio = time.time()
-
-    while time.time() - inicio < 5:
-
-        sucesso, frame = cam.read()
-
-        if not sucesso:
-            continue
-
-        resultados = modelo(frame, verbose=False)
-
-        for caixa in resultados[0].boxes:
-
-            classe = int(caixa.cls[0])
-
-            nome = modelo.names[classe]
-
-            nome = TRADUCAO.get(nome, nome)
-
-            if nome not in objetos:
-
-                objetos.append(nome)
-
-                print("👀", nome)
-
-        frame = resultados[0].plot()
-
-        cv2.imshow("Accio - Visão IA", frame)
-
-        if cv2.waitKey(1) == ord("q"):
-            break
-
-    cam.release()
-    cv2.destroyAllWindows()
-
-    print("\n💾 A atualizar memória visual...\n")
-
-    for objeto in objetos:
-        atualizar(objeto, divisao)
-
-    print("✅ Memória atualizada!")
-
-    return objetos
-
-
-if __name__ == "__main__":
-
-    observar("Sala")
+    executar_comando(comando)

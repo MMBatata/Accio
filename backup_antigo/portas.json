@@ -1,0 +1,30 @@
+[
+    {
+        "origem": "quarto 2",
+        "destino": "casa de banho 2"
+    },
+    {
+        "origem": "corredor",
+        "destino": "quarto 2"
+    },
+    {
+        "origem": "corredor",
+        "destino": "casa de banho 1"
+    },
+    {
+        "origem": "corredor",
+        "destino": "quarto 1"
+    },
+    {
+        "origem": "hall de entrada",
+        "destino": "corredor"
+    },
+    {
+        "origem": "hall de entrada",
+        "destino": "cozinha"
+    },
+    {
+        "origem": "hall de entrada",
+        "destino": "sala"
+    }
+]

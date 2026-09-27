@@ -1,0 +1,7 @@
+{
+    "local": "base",
+    "posicao": "hall de entrada",
+    "bateria": 100,
+    "ocupado": false,
+    "a_transportar": null
+}

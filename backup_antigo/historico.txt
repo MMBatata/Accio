@@ -2,3 +2,4 @@ trazer|telemovel
 trazer|livro
 trazer|oculos
 trazer|oculos
+trazer|oculos

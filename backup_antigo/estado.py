@@ -1,10 +1,31 @@
-estado = {
-    "local": "base",
-    "posicao": "hall",
-    "bateria": 100,
-    "ocupado": False,
-    "a_transportar": None
-}
+import json
+import os
+
+FICHEIRO = "estado.json"
+
+def carregar_estado():
+
+    if not os.path.exists(FICHEIRO):
+
+        return {
+            "local": "base",
+            "posicao": "hall de entrada",
+            "bateria": 100,
+            "ocupado": False,
+            "a_transportar": None
+        }
+
+    with open(FICHEIRO, "r", encoding="utf-8") as f:
+
+        return json.load(f)
+
+
+def guardar_estado(estado):
+
+    with open(FICHEIRO, "w", encoding="utf-8") as f:
+
+        json.dump(estado, f, indent=4, ensure_ascii=False)
+estado = carregar_estado()
 
 
 def estado_accio():

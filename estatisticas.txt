@@ -1,2 +1,0 @@
-livro|1
-oculos|2

@@ -1,0 +1,48 @@
+{
+    "Hall de entrada": {
+        "Pessoa": {
+            "vezes_visto": 4
+        },
+        "Telemóvel": {
+            "vezes_visto": 1
+        },
+        "Televisão": {
+            "vezes_visto": 1
+        }
+    },
+    "Sala": {
+        "Pessoa": {
+            "vezes_visto": 3
+        }
+    },
+    "Cozinha": {
+        "Pessoa": {
+            "vezes_visto": 1
+        }
+    },
+    "Corredor": {
+        "Pessoa": {
+            "vezes_visto": 2
+        }
+    },
+    "Quarto 1": {
+        "Pessoa": {
+            "vezes_visto": 2
+        }
+    },
+    "Quarto 2": {
+        "Pessoa": {
+            "vezes_visto": 2
+        }
+    },
+    "WC 1": {
+        "Pessoa": {
+            "vezes_visto": 1
+        }
+    },
+    "WC 2": {
+        "Pessoa": {
+            "vezes_visto": 1
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "robot": {
+        "x": 0,
+        "y": 0,
+        "divisao": "Hall de entrada"
+    },
+    "objetos": {
+        "Pessoa": {
+            "divisao": "Quarto 2",
+            "x": 0,
+            "y": 0,
+            "chip": null,
+            "ultima_vez_visto": 0
+        },
+        "Telemóvel": {
+            "divisao": "Hall de entrada",
+            "x": 0,
+            "y": 0,
+            "chip": null,
+            "ultima_vez_visto": 0
+        },
+        "Televisão": {
+            "divisao": "Hall de entrada",
+            "x": 0,
+            "y": 0,
+            "chip": null,
+            "ultima_vez_visto": 0
+        }
+    },
+    "divisoes": {}
+}

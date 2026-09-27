@@ -1,152 +1,90 @@
+# robot.py
 import time
-from memoria import obter_local, atualizar_memoria
-from estado import estado, gastar_bateria, carregar_bateria
+# Importamos as funções de segurança e localização do mapa mental
+from mapa import obter_posicao_atual, atualizar_posicao
 
+# Coordenadas dos teus objetos na grelha da casa (ex: mesa, sofá, etc.)
+CHIPS_DOS_OBJETOS = {
+    "telemovel": {"id": "BT_ID_TELEMOVEL_99", "coordenada": [1, 5]},
+    "comando": {"id": "BT_ID_COMANDO_TV_01", "coordenada": [3, 1]},
+    "chaves": {"id": "BT_ID_CHAVES_CASA_02", "coordenada": [2, 2]}
+}
 
-def executar_missao(objeto, local):
+def accio_buscar_objeto(objeto):
+    print(f"\n⚡ [Feitiço Accio Ativado] Alvo: {objeto}")
+    
+    if objeto not in CHIPS_DOS_OBJETOS:
+        print(f"🤖 O objeto '{objeto}' não tem nenhum chip registado no meu sistema.")
+        return
 
-    if estado["bateria"] < 20:
-
-        print("⚠️ Bateria fraca.")
-
-    carregar_bateria()
-
-    print("\n🤖 Missão iniciada!")
+    destino = CHIPS_DOS_OBJETOS[objeto]["coordenada"]
+    id_chip = CHIPS_DOS_OBJETOS[objeto]["id"]
+    
+    print(f"🧠 Localização do chip [{id_chip}] encontrada no mapa: {destino}")
+    print(f"📍 Posição inicial do Accio: {obter_posicao_atual()}")
     time.sleep(1)
-    estado["ocupado"] = True
-    estado["a_transportar"] = objeto
 
-    # 1 - Verificar a memória
-    ultimo_local = obter_local(objeto)
-
-    if ultimo_local is not None:
-
-        print(f"🧠 Lembro-me de ter visto {objeto} em {ultimo_local}.")
-        time.sleep(1)
-
-        print(f"🚶 Vou primeiro a {ultimo_local}...")
-        time.sleep(2)
-
-        print("🚪 A entrar na divisão...")
-        time.sleep(1)
-        gastar_bateria(10)
-
-        print("👀 A observar o ambiente...")
-        time.sleep(2)
-        gastar_bateria(5)
-
-        print("🔎 A verificar as superfícies...")
-        time.sleep(2)
-
-        print(f"🔍 À procura de {objeto}...")
-        time.sleep(2)
-
-        resposta = input(
-            f"\n👤 O {objeto} estava em {ultimo_local}? (s/n): "
-        ).lower()
-
-        if resposta == "s":
-
-            print(f"📦 Encontrei {objeto}!")
-            time.sleep(2)
-
-            print("↩️ A regressar...")
-            time.sleep(2)
-            gastar_bateria(10)
-
-            print("🎁 Objeto entregue!")
-            estado["ocupado"] = False
-        estado["a_transportar"] = None
-        estado["local"] = "base"
-        return
-
-        print("🤔 Já não estava lá...")
-        time.sleep(2)
-
-    # 2 - Ir ao local do mapa
-    if local != "local desconhecido":
-
+    print("\n🗺️ A planear rota segura através do mapa mental...")
+    time.sleep(1)
+    
+    # Navegação passo a passo até ao objeto
+    while obter_posicao_atual() != destino:
+        atual = obter_posicao_atual()
+        proxima_linha = atual[0]
+        proxima_coluna = atual[1]
         
-        estado["local"] = local
-        print(f"\n📍 Vou ao local conhecido: {local}")
-        time.sleep(2)
-
-        print("🚪 A entrar na divisão...")
-        time.sleep(1)
-        gastar_bateria(10)
-
-        print("👀 A observar o ambiente...")
-        time.sleep(2)
-        gastar_bateria(5)
-
-        print("🔎 A verificar as superfícies...")
-        time.sleep(2)
-
-        print(f"🔍 À procura de {objeto}...")
-        time.sleep(2)
-        gastar_bateria(5)
-
-        resposta = input(
-            f"\n👤 O {objeto} estava em {local}? (s/n): "
-        ).lower()
-
-        if resposta == "s":
-
-            print(f"📦 Encontrei {objeto}!")
-            atualizar_memoria(objeto, local)
-
-            time.sleep(2)
-
-            print("↩️ A regressar...")
-            time.sleep(2)
-            gastar_bateria(10)
-
-            print("🎁 Objeto entregue!")
-            estado["ocupado"] = False
-        estado["a_transportar"] = None
-        estado["local"] = "base"
-        return
+        if proxima_linha < destino[0]: proxima_linha += 1
+        elif proxima_linha > destino[0]: proxima_linha -= 1
+        elif proxima_coluna < destino[1]: proxima_coluna += 1
+        elif proxima_coluna > destino[1]: proxima_coluna -= 1
         
+        # Executa o movimento consultando a matriz de segurança
+        movimento_seguro = atualizar_posicao(proxima_linha, proxima_coluna)
+        if not movimento_seguro:
+            print("🚨 Rota abortada por risco de colisão física! O robô recusa-se a bater na parede.")
+            return
+            
+        print(f"🚗 Motores avançam para: {obter_posicao_atual()}")
+        time.sleep(0.6)
 
-        print("🤔 Também não estava lá.")
-        time.sleep(2)
+    # Ativação da garra de sucção ao chegar
+    print(f"\n🎯 Posição {destino} alcançada com precisão milimétrica!")
+    print("🦾 Ventosa posicionada sobre o alvo.")
+    print("💨 Bomba de vácuo ativada. Pressão negativa criada... Objeto seguro!")
+    time.sleep(1.5)
+    print("↩️ A calcular rota de regresso à base pelo mapa mental... Entrega efetuada! 🎁")
 
-    # 3 - Procurar pela casa
-    print("\n🏠 Vou procurar pela casa...")
-    time.sleep(2)
 
-    print("🚪 A percorrer a casa...")
-    time.sleep(2)
-    gastar_bateria(10)
-
-    print("👀 A observar todas as divisões...")
-    time.sleep(2)
-    gastar_bateria(5)
-
-    print(f"🔍 Ainda à procura de {objeto}...")
-    time.sleep(2)
-
-    novo_local = input(
-        "\n👤 Em que divisão encontraste o objeto? "
-    )
-
-    estado["local"] = novo_local
-
-    atualizar_memoria(objeto, novo_local)
-
-    print("\n🧠 Memória atualizada!")
-    print(f"Da próxima vez vou procurar primeiro em {novo_local}.")
-    time.sleep(2)
-
-    print("📦 Objeto encontrado!")
-    time.sleep(2)
-
-    print("↩️ A regressar...")
-    time.sleep(2)
-    gastar_bateria(10)
-
-    print("🎁 Objeto entregue!")
-
-    estado["ocupado"] = False
-estado["a_transportar"] = None
-estado["local"] = "base"
+def vir_ter_comigo():
+    print("\n⚡ [Feitiço Supremo Ativado] 'Accio Accio!'")
+    print("🎤 Placa de Microfones Reativa Ativada... A ouvir ondas sonoras...")
+    time.sleep(1)
+    
+    # Definimos o ângulo e a coordenada onde tu estás ficticiamente (ex: Linha 4, Coluna 4)
+    angulo_da_voz = 45
+    coordenada_dono = [4, 4]
+    
+    print(f"🔊 [ÂNGULO DETETADO]: Voz vinda a {angulo_da_voz}°!")
+    print("📡 [FUSÃO DE SENSORES]: Trancando posição no mapa mental...")
+    time.sleep(1)
+    
+    # Navegação segura até ti
+    while obter_posicao_atual() != coordenada_dono:
+        atual = obter_posicao_atual()
+        proxima_linha = atual[0]
+        proxima_coluna = atual[1]
+        
+        if proxima_linha < coordenada_dono[0]: proxima_linha += 1
+        elif proxima_linha > coordenada_dono[0]: proxima_linha -= 1
+        elif proxima_coluna < coordenada_dono[1]: proxima_coluna += 1
+        elif proxima_coluna > coordenada_dono[1]: proxima_coluna -= 1
+            
+        movimento_seguro = atualizar_posicao(proxima_linha, proxima_coluna)
+        if not movimento_seguro:
+            print("🚨 Rota interrompida! Há um obstáculo no caminho.")
+            return
+            
+        print(f"🚗 Accio a avançar em direção à tua voz... Posição: {obter_posicao_atual()}")
+        time.sleep(0.6)
+        
+    print("\n🤖 [Magia Concluída] Parei exatamente à tua frente!")
